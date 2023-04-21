@@ -37,3 +37,28 @@ It can be distributed to
 1. Origin Servers
 2. CDN
 3. The Edge
+
+=================================
+# Fast Blog
+
+## Use of Link Tag.
+<Link> allows client-side-navigation and allows props passing.
+
+**Client-side navigation** means that the page transition happens using JavaScript, which is faster than the default navigation done by the browser. [You can check this by changing the background color with browser tool and navigating with Link and observing the bg persists between transition. That means it didn't take full reload of the browser]
+
+### Code Splitting
+Next.js does code splitting automatically, so each page only loads what’s necessary for that page. That means when the homepage is rendered, the code for other pages is not served initially.
+
+### Prefetching
+Next.js automatically prefetches the code for the linked page in the background.
+
+## Use of Image Tag
+Image allows lazy loading by default.
+
+Images are always rendered in such a way as to avoid **Cumulative Layout Shift**, a Core Web Vital that Google is going to use in search ranking.
+
+## Use of Head Tag
+Head allows for change in metadata of individual pages. title can be custom made based on page.
+
+## Use of Script Tag
+Script tag allows for third party script to be added int the application. Some additional props can be used to optimize the the operation. Such as 'onLoad' and 'strategy'
