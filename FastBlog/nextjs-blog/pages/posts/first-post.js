@@ -18,9 +18,6 @@ const firstPost = () => {
             /> */}
             <h1>This is First Post</h1>
             <br />
-            <h2>
-                <Link href='/'>Navigate to home</Link>
-            </h2>
         </Layout>
     );
 }
