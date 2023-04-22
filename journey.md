@@ -38,7 +38,7 @@ It can be distributed to
 2. CDN
 3. The Edge
 
-=================================
+-----------------------------------------------------------
 # Fast Blog
 
 ## Use of Link Tag.
@@ -68,3 +68,75 @@ we can create comp.module.css to add the styling to any component.
 
 ## Global CSS
 Global CSS can be imported in _app.js file. The file can be at any place. If the file is imported in the _app.js, the global styling of the application would change.
+
+## Pre rendering
+If you disable the javascript in the browser and try to browse a React.js application it won't load. But the same is not true for the nextJS Application. Because by default nextJS pre renders all the page. And make the pages interactive after initial js load. [for example Link components will be clickable after JS load]
+
+# Two Form of Pre-Rendering and Data Fetching
+There are two forms of pre rendering
+1. Static Generation
+2. Server Side Rendering
+
+For SG it is built at the built time. For the SSR it is built on every request. So it is better to do as much as we can SG. But if the data frequently changes in the alpplication it is preferable to do SSR and even CR.
+
+**This can be decided per page basis. So you may decide to SG one page, SSR one page and CSR another page.**
+
+## Static Generation with and without Data
+We can use SG in almost all pages. The rule of thumb is ask ourselves, "Can I pre render this page in advance?" If the answer is true then it should use SG.
+
+But Sometimes it has some data dependecy. In this case we need to first fetch the data with `async getStaticProps = () => {}` and use that data as prop to our page.
+
+### use of `getStaticProps`
+
+```js
+export default function Blog({ posts }) {
+  // Render posts...
+}
+
+// This function gets called at build time
+export async function getStaticProps() {
+  // Call an external API endpoint to get posts
+  const res = await fetch('https://.../posts')
+  const posts = await res.json()
+
+  // By returning { props: { posts } }, the Blog component
+  // will receive `posts` as a prop at build time
+  return {
+    props: {
+      posts,
+    },
+  }
+}
+```
+### use of `getServerSideProps`
+
+Because getServerSideProps is called at request time, its parameter (context) contains request specific parameters.
+
+```js
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      // props for your component
+    },
+  };
+}
+```
+
+`Pro Tip: Statically Generate the part of the page that doesn't require the data and client side render what needs the data.`
+
+## SWR
+It handles caching, revalidation, focus tracking, refetching on interval, and more.
+
+``` js
+import useSWR from 'swr';
+
+function Profile() {
+  const { data, error } = useSWR('/api/user', fetch);
+
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+  return <div>hello {data.name}!</div>;
+}
+```
+
+# Dynamic Routing
