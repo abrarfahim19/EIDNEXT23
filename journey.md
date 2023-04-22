@@ -62,3 +62,9 @@ Head allows for change in metadata of individual pages. title can be custom made
 
 ## Use of Script Tag
 Script tag allows for third party script to be added int the application. Some additional props can be used to optimize the the operation. Such as 'onLoad' and 'strategy'
+
+## Module CSS
+we can create comp.module.css to add the styling to any component.
+
+## Global CSS
+Global CSS can be imported in _app.js file. The file can be at any place. If the file is imported in the _app.js, the global styling of the application would change.
