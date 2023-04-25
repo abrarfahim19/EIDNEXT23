@@ -140,3 +140,62 @@ function Profile() {
 ```
 
 # Dynamic Routing
+
+Create an `[id].js` file. This will tell NextJS that I want to implement dynamic routing in my application. And we have to use 2 nextJS function in the `[id].js` file.
+
+1. getStaticPaths
+
+This tells the NextJS the possible id name.
+
+```js
+export async function getStaticPaths() {
+    const paths = getAllPagesId();
+    return {
+        paths,
+        fallback: false,
+    };
+}
+```
+Here, fallback:false means any id outside of the paths will be redirected to 404 page.
+
+2. getStaticProps
+
+The use of this is to load the data into the `[id].js`.
+
+```js
+export async function getStaticProps({ params }) {
+    const pageData = getPageData(params.id);
+    return {
+        props: {
+            pageData
+        }
+    }
+}
+```
+
+since we used `[id].js` we have to make sure that `getStaticPaths` returns
+
+```js
+[
+  {
+    params: {
+      id: 'ssg-ssr'
+    }
+  },
+  {
+    params: {
+      id: 'pre-rendering'
+    }
+  }
+]
+```
+
+and the pageData will be available to the [id].js 's page component. You may destructure the data and use it
+
+```js
+export const Page = ({pageData}) =>{
+  return (
+    <h1>{pageData.id}</h1>
+  )
+}
+```

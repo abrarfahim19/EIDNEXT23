@@ -2,6 +2,8 @@
 import fs from 'fs'; // fs module provides methods for working with the file system
 import path from 'path'; // path module provides methods for working with file and directory paths
 import matter from 'gray-matter'; // gray-matter is a library for parsing front-matter from markdown files
+import { remark } from 'remark'; // Remark for showing markdown file
+import html from 'remark-html'; // for displaying the markdown in html format
 
 // Define the directory where the markdown files are stored
 const postsDirectory = path.join(process.cwd(), 'posts');
@@ -62,18 +64,23 @@ export const getAllPostsId = () => {
             },
         };
     });
-}
+};
 
-export const getPostData = id => {
+export const getPostData = async id => {
     const fullPath = path.join(postsDirectory, `${id}.md`);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
 
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
+    const processedContent = await remark()
+        .use(html)
+        .process(matterResult.content);
+    const contentHtml = processedContent.toString();
 
     // Combine the data with the id
     return {
         id,
+        contentHtml,
         ...matterResult.data,
     };
 }
