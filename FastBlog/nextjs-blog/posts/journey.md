@@ -1,3 +1,8 @@
+---
+title: 'The Basics of NEXTJS'
+date: '2023-04-25'
+---
+
 # Development And Production
 
 The underlying concepts that makes NEXTJS so efficient are:
