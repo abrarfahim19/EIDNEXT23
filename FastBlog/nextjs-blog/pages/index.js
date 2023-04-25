@@ -25,7 +25,6 @@ export default function Home({ allPostsData }) {
         <p>
           A machine learning engineer and web developer from Bangladesh trying to make my dent in the world.
         </p>
-        <Link href='/posts/first-post'>My First Blog</Link>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
