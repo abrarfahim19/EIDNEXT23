@@ -4,6 +4,8 @@ import path from 'path'; // path module provides methods for working with file a
 import matter from 'gray-matter'; // gray-matter is a library for parsing front-matter from markdown files
 import { remark } from 'remark'; // Remark for showing markdown file
 import html from 'remark-html'; // for displaying the markdown in html format
+import prism from 'remark-prism';
+
 
 // Define the directory where the markdown files are stored
 const postsDirectory = path.join(process.cwd(), 'posts');
@@ -73,7 +75,8 @@ export const getPostData = async id => {
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
     const processedContent = await remark()
-        .use(html)
+        .use(html, { sanitize: false })
+        .use(prism)
         .process(matterResult.content);
     const contentHtml = processedContent.toString();
 
