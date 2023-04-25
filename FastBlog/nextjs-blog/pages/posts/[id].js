@@ -45,7 +45,7 @@ const Post = ({ postData }) => {
                     className="prose lg:prose-xl px-8 m-auto my-4 sm:my-16"
                     dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
                 />
-                {/* <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} /> */}
+                {/* <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />  */}
             </article>
         </Layout>
     );
