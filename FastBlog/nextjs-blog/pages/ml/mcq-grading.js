@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout";
 import { pdfjs, Document, Page } from "react-pdf";
+import DirectionalButton from "../../components/Buttons/DirectionalButton.js";
+import Spacer from "../../components/Spacer";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const scan = () => {
@@ -10,25 +12,46 @@ const scan = () => {
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
+
+  const handleLeftClick = () => {
+    console.log("Left");
+  };
+  const handleRightClick = () => {
+    console.log("Right");
+  };
   return (
     <Layout>
-      <h1>Hello</h1>
-      <Document file="/dorian.pdf" onLoadSuccess={onDocumentLoadSuccess}>
+      <Document
+        file="/dorian.pdf"
+        className={"self-center w-full bg-blue-100 flex justify-center"}
+        onLoadSuccess={onDocumentLoadSuccess}
+      >
         <Page
           renderTextLayer={false}
           renderAnnotationLayer={false}
           renderMode="canvas"
-          width={"500"}
-          height={"800"}
+          width={"400"}
+          // height={"800"}
           //{/* TailwindCSS not working */}
-          className={"w-100"}
+          className={""}
           pageNumber={10}
         />
       </Document>
-      <p className="text-7xl">
+      <p className="text-xl">
         {/* TailwindCSS not working */}
         Page {pageNumber} of {numPages}
       </p>
+      <DirectionalButton
+        disable={pageNumber === 1 ? true : false}
+        left={true}
+        handleClick={handleLeftClick}
+      />
+      <Spacer />
+      <DirectionalButton
+        disable={pageNumber === 1 ? true : false}
+        left={false}
+        handleClick={handleRightClick}
+      />
     </Layout>
   );
 };
