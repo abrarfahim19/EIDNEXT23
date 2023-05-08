@@ -2,56 +2,62 @@ import React, { useState } from "react";
 import Layout from "../../components/Layout";
 import { pdfjs, Document, Page } from "react-pdf";
 import DirectionalButton from "../../components/Buttons/DirectionalButton.js";
-import Spacer from "../../components/Spacer";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const scan = () => {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
+  console.log("numPages is", numPages, pageNumber);
 
   const handleLeftClick = () => {
-    console.log("Left");
+    if (pageNumber !== 1) setPageNumber((prev) => prev - 1);
   };
   const handleRightClick = () => {
-    console.log("Right");
+    if (pageNumber !== numPages) setPageNumber((prev) => prev + 1);
   };
   return (
     <Layout>
       <Document
         file="/dorian.pdf"
-        className={"self-center w-full bg-blue-100 flex justify-center"}
+        className={
+          "self-center w-full bg-blue-100 flex relative justify-center"
+        }
         onLoadSuccess={onDocumentLoadSuccess}
       >
         <Page
           renderTextLayer={false}
           renderAnnotationLayer={false}
           renderMode="canvas"
-          width={"400"}
           // height={"800"}
-          //{/* TailwindCSS not working */}
+          height={"800"}
+          // scale={2.0}
           className={""}
-          pageNumber={10}
+          pageNumber={pageNumber}
         />
+        <div className="absolute flex flex-row bottom-0">
+          <DirectionalButton
+            disabled={pageNumber === 1 ? true : false}
+            left={true}
+            handleClick={handleLeftClick}
+          />
+          <div className="flex justify-center items-center px-3 bg-opacity-50 bg-white">
+            <p className="text-xl">
+              {/* TailwindCSS not working */}
+              {pageNumber} of {numPages}
+            </p>
+          </div>
+          <DirectionalButton
+            disabled={pageNumber === numPages ? true : false}
+            left={false}
+            handleClick={handleRightClick}
+          />
+        </div>
       </Document>
-      <p className="text-xl">
-        {/* TailwindCSS not working */}
-        Page {pageNumber} of {numPages}
-      </p>
-      <DirectionalButton
-        disable={pageNumber === 1 ? true : false}
-        left={true}
-        handleClick={handleLeftClick}
-      />
-      <Spacer />
-      <DirectionalButton
-        disable={pageNumber === 1 ? true : false}
-        left={false}
-        handleClick={handleRightClick}
-      />
+
+      {/* <Spacer /> */}
     </Layout>
   );
 };
