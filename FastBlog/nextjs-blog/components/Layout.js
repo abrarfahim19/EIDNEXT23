@@ -36,7 +36,29 @@ export default function Layout({ children, home }) {
               width={144}
               alt=""
             />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
+            {/* <h1 className={utilStyles.heading2Xl}>{name}</h1> */}
+            <nav className="m-4 w-full flex justify-center items-center">
+              <Link href="/posts">
+                <p className="text-gray-900 hover:text-blue-500 px-4 font-semibold py-2">
+                  Blog
+                </p>
+              </Link>
+              <Link href="/ml">
+                <p className="text-gray-900 hover:text-blue-500 px-4 font-semibold py-2">
+                  ML
+                </p>
+              </Link>
+              <Link href="/bio">
+                <p className="text-gray-900 hover:text-blue-500 px-4 font-semibold py-2">
+                  Bio
+                </p>
+              </Link>
+              <Link href="/contact">
+                <p className="text-gray-900 hover:text-blue-500 px-4 font-semibold py-2">
+                  Contact
+                </p>
+              </Link>
+            </nav>
           </>
         ) : (
           <>
