@@ -14,6 +14,7 @@ export async function getServerSideProps({ req }) {
 }
 
 const Bio = ({ ip }) => {
+  console.log("Loading IP...");
   console.log("The Ip is ,", ip);
   return (
     <Layout>
