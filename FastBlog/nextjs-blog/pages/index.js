@@ -1,9 +1,11 @@
-import Head from 'next/head';
-import Layout, { siteTitle } from '../components/Layout';
-import utilStyles from '../styles/utils.module.css';
-import Link from 'next/link';
+import Head from "next/head";
+import Layout, { siteTitle } from "../components/Layout";
+import utilStyles from "../styles/utils.module.css";
+import Link from "next/link";
 import { getSortedPostsData } from "../lib/posts";
-import Date from '../components/Date';
+import Date from "../components/Date";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -15,16 +17,17 @@ export async function getStaticProps() {
 }
 
 export default function Home({ allPostsData }) {
-  console.log("allPostsData", allPostsData)
+  // console.log("allPostsData", allPostsData);
   return (
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>Determination to beat resistence and love for craft</p>
         <p>
-          A machine learning engineer and web developer from Bangladesh trying to make my dent in the world.
+          I am a software engineer with one year of experience, specializing in
+          Python, React ecosystem, and data analysis, with a strong
+          understanding of machine learning algorithms
         </p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
@@ -41,6 +44,7 @@ export default function Home({ allPostsData }) {
           ))}
         </ul>
       </section>
+      <ToastContainer />
     </Layout>
   );
 }

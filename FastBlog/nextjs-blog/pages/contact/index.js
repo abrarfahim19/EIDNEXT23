@@ -1,19 +1,52 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import Layout from "../../components/Layout";
 import { VscGithubInverted, VscTwitter } from "react-icons/vsc";
 import { BsLinkedin } from "react-icons/bs";
 import { IoLogoWhatsapp } from "react-icons/io";
 import openInNewTab, { callNumber } from "../../lib/commonFunctions";
+import emailjs from "@emailjs/browser";
+import Button from "../../components/Button";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Contact = () => {
+  const form = useRef();
+  // const templateParams = {
+  //   user_name: "James",
+  //   message: "Check this out!",
+  //   user_emai: "James",
+  // };
+  console.log("Data");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const sendEmail = (e) => {
+    setIsLoading(true);
+    e.preventDefault();
+    emailjs
+      .sendForm(
+        "service_vknniih",
+        "template_qmxplwm",
+        form.current,
+        "Dzu577HrTE6mqSTXw"
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          setIsLoading(false);
+        }
+      });
+    e.target.reset();
+    toast("Message is sent!");
+  };
+  // const notify = () => toast("Wow so easy !");
   return (
     <Layout>
       <div className="container mb-24 mt-5 px-6 mx-auto">
         {/* <!-- Section: Design Block --> */}
+        {/* <Button title="Go" pressHandler={notify} /> */}
         <section className="mb-32 text-center text-gray-800">
           <div className="max-w-[700px] mx-auto px-3 lg:px-6">
             <h2 className="text-3xl font-bold mb-12">Contact Me!</h2>
-            <form>
+            <form ref={form} onSubmit={sendEmail}>
               <div className="form-group mb-6">
                 <input
                   type="text"
@@ -33,11 +66,13 @@ const Contact = () => {
           focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleInput7"
                   placeholder="Name"
+                  name="from_name"
                 />
               </div>
               <div className="form-group mb-6">
                 <input
                   type="email"
+                  name="user_email"
                   className="form-control block
           w-full
           px-3
@@ -77,6 +112,7 @@ const Contact = () => {
         "
                   id="exampleFormControlTextarea13"
                   rows="3"
+                  name="message"
                   placeholder="Message"
                 ></textarea>
               </div>
@@ -168,6 +204,7 @@ const Contact = () => {
         </section>
         {/* <!-- Section: Design Block --> */}
       </div>
+      <ToastContainer />
     </Layout>
   );
 };
