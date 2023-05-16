@@ -9,3 +9,12 @@ export function callNumber(phoneNumber) {
 export function downloadFile(path) {
   window.open(path, "_blank", "download");
 }
+
+export function convertHyphenatedString(string) {
+  const convertedString = string
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+  return convertedString;
+}
