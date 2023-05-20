@@ -32,7 +32,6 @@ const ML = ({filenames}) => {
           <Link href={`ml/${item.slice(0,-3)}`}><h1>{convertHyphenatedString(item.slice(0,-3))}</h1></Link>
         )})}
       </div>;
-
     </Layout>
   );
 };
