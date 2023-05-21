@@ -3,7 +3,7 @@ import Layout from "../../components/Layout";
 import { VscGithubInverted, VscTwitter } from "react-icons/vsc";
 import { BsLinkedin } from "react-icons/bs";
 import { IoLogoWhatsapp } from "react-icons/io";
-import openInNewTab, { callNumber } from "../../lib/commonFunctions";
+import { callNumber, openInNewTab } from "../../lib/commonFunctions";
 import emailjs from "@emailjs/browser";
 import Button from "../../components/Button";
 import { ToastContainer, toast } from "react-toastify";
