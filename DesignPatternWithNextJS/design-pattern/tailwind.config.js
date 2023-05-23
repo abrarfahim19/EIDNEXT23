@@ -13,8 +13,15 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors:{
-        brand: "#f22f2f"
+        brand: "#E55E2C"
       },
+      fontSize :{
+        "h1": ['80px',{lineHeight:'80px',letterSpacing:'-0.032em'}]
+      },
+      fontFamily:{
+        'kaushan':[ 'Kaushan Script', "cursive"],
+        'raleway':['Raleway', 'sans-serif']
+      }
     },
   },
   plugins: [],
