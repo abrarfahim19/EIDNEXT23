@@ -1,5 +1,5 @@
-import { Meta, StoryFn } from "@storybook/react";
-import { Button, ButtonProps } from "./Button";
+import { Meta, StoryObj } from "@storybook/react";
+import { Button } from "./Button";
 
 export default {
   title: "UI/Button",
@@ -7,43 +7,46 @@ export default {
   tags: ["autodocs"],
 } as Meta<typeof Button>;
 
-type Story = StoryFn<typeof Button>;
-const Template: Story = (args: ButtonProps) => <Button {...args} />;
+type Story = StoryObj<typeof Button>;
 
-export const Primary = Template.bind({});
-Primary.args = {
-  //   text: "Sample",
-  intent: "primary",
-  label: "Primary",
-  size: "medium",
+export const Primary: Story = {
+  args: {
+    //   text: "Sample",
+    intent: "primary",
+    size: "medium",
+    label: "Primary",
+  },
 };
 
-export const Secondary = Template.bind({});
-Secondary.args = {
-  intent: "secondary",
-  label: "Secondary",
-  size: "medium",
+export const Secondary: Story = {
+  args: {
+    intent: "secondary",
+    size: "medium",
+    label: "Secondary",
+  },
 };
 
-export const Danger = Template.bind({});
-Danger.args = {
-  intent: "danger",
-  label: "Danger",
-  size: "medium",
+export const Danger: Story = {
+  args: {
+    intent: "danger",
+    label: "Danger",
+    size: "medium",
+  },
 };
 
-export const Medium = Template.bind({});
-Medium.args = {
-  //   intent: "secondary",
-  size: "medium",
-  label: "Medium",
-  intent: "secondary",
+export const Medium: Story = {
+  args: {
+    //   intent: "secondary",
+    intent: "secondary",
+    size: "medium",
+    label: "Medium",
+  },
 };
 
-export const Small = Template.bind({});
-Small.args = {
-  //   intent: "secondary",
-  size: "small",
-  label: "Small",
-  intent: "secondary",
+export const Small: Story = {
+  args: {
+    intent: "secondary",
+    size: "small",
+    label: "Small",
+  },
 };
