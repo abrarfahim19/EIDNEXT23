@@ -5,6 +5,13 @@ export default {
   title: "UI/Button",
   component: Button,
   tags: ["autodocs"],
+  args: {
+    // children: "Click Me",
+  },
+  argTypes: {
+    intent: { control: "select" },
+    size: { control: "select" },
+  },
 } as Meta<typeof Button>;
 
 type Story = StoryObj<typeof Button>;
