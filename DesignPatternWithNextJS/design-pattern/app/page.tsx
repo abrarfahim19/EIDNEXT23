@@ -1,9 +1,17 @@
-import MyMenu from '@ui/Menu';
-import Button from '@ui/Button'
+import MyMenu from "@ui/Menu";
+import { Button } from "@ui/Button";
 import { cx } from "class-variance-authority";
 
 const intents = [undefined, "primary", "secondary", "danger"] as const;
 const sizes = [undefined, "medium", "small"] as const;
+
+const clsx = (val: string) => {
+  return val;
+};
+
+let classes = clsx(" container w-full");
+
+let className = " px-4 bg-blue-500 rounded py-2 text-base text-white";
 
 export default function Home() {
   return (
@@ -25,23 +33,28 @@ export default function Home() {
           </tr>
         </thead>
         <tbody>
-          {sizes.map((size) => (
-            <tr>
+          {sizes.map((size, index) => (
+            <tr key={index}>
               <th scope="row">{size || "default"}</th>
-              {intents.map((intent) => (
-                <td scope="col">
-                  <Button {...(intent && { intent })} {...(size && { size })}>
-                    {intent || "default"} button
-                  </Button>
+              {intents.map((intent, index2) => (
+                <td key={index2} scope="col">
+                  <Button
+                    {...(intent && { intent })}
+                    {...(size && { size })}
+                    label={`${intent || "default"} button`}
+                  ></Button>
                 </td>
               ))}
             </tr>
           ))}
         </tbody>
       </table>
-      <MyMenu/>
-      <h1 className='text-h1'>Body Font : Raleway</h1>
-      <h1 className='font-kaushan text-h1'>Cursive Font : Kaushan</h1>
+      <MyMenu />
+      <Button intent={"danger"} size={"medium"}>
+        Danger
+      </Button>
+      <h1 className="text-h1">Body Font : Raleway</h1>
+      <h1 className="font-kaushan text-h1">Cursive Font : Kaushan</h1>
     </main>
-  )
+  );
 }

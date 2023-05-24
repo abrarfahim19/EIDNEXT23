@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
- 
-const button = cva(["font-thin", "border", "rounded"], {
+
+const button = cva("rounded border bg-brand font-thin", {
   variants: {
     intent: {
       primary: [
@@ -10,15 +10,13 @@ const button = cva(["font-thin", "border", "rounded"], {
         "border-transparent",
         "hover:bg-brand/50",
       ],
-      // **or**
-      // primary: "bg-blue-500 text-white border-transparent hover:bg-blue-600",
       secondary: [
-        "bg-transparent",
         "text-brand",
+        "bg-transparent",
         "border-brand",
         "hover:bg-gray-50/20",
       ],
-      danger: "bg-red-600 border-dashed hover:bg-red-500"
+      danger: "border-dashed bg-red-600 hover:bg-red-500",
     },
     size: {
       small: ["text-sm", "py-1", "px-2"],
@@ -26,40 +24,42 @@ const button = cva(["font-thin", "border", "rounded"], {
     },
   },
   compoundVariants: [
-    {
-      intent: "primary",
-      size: "medium",
-      class: "uppercase",
-      // **or** if you're a React.js user, `className` may feel more consistent:
-      // className: "uppercase"
-    },
-    {
-      intent:"danger",
-      size:"medium",
-      class:"uppercase"
-    }
+    // {
+    //   intent: "primary",
+    //   size: "medium",
+    //   className: "uppercase",
+    // },
+    // {
+    //   intent: "danger",
+    //   size: "medium",
+    //   className: "uppercase",
+    // },
   ],
   defaultVariants: {
     intent: "primary",
     size: "medium",
   },
 });
- 
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof button> {}
+    VariantProps<typeof button> {
+  label?: string;
+}
 
-
-const Button :React.FC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   className,
   intent,
   size,
+  label,
   ...props
 }) => {
-    return (
-     <button className={button({ intent, size, className })} {...props} />
-    );
-}
+  return (
+    <button className={button({ intent, size, className })} {...props}>
+      {label}
+      {props.children}
+    </button>
+  );
+};
 
-export default Button;
+// export Button;
