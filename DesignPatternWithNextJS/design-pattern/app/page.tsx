@@ -5,14 +5,6 @@ import { cx } from "class-variance-authority";
 const intents = [undefined, "primary", "secondary", "danger"] as const;
 const sizes = [undefined, "medium", "small"] as const;
 
-const clsx = (val: string) => {
-  return val;
-};
-
-let classes = clsx(" container w-full");
-
-let className = " px-4 bg-blue-500 rounded py-2 text-base text-white";
-
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 font-raleway">
