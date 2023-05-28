@@ -24,6 +24,7 @@ module.exports = {
       fontFamily: {
         kaushan: ["Kaushan Script", "cursive"],
         raleway: ["Raleway", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
       },
     },
   },
