@@ -1,6 +1,6 @@
 ---
 title: 'What is linter and formatter?'
-date: '2023-05-22'
+date: '2023-07-26'
 ---
 
 Linters and formatters are both tools used in software development to improve code quality and maintainability, but they serve different purposes and have distinct functionalities.
